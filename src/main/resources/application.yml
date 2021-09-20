@@ -1,0 +1,130 @@
+server:
+  port: 80
+  servlet:
+    context-path: /monitor/v1
+spring:
+  application:
+    name: hrss-monitor-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.9.225:3307/hrss_3?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: Wdcloud998
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: monitor-centerHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: select 1
+  redis:
+    database: 16
+    host: 192.168.9.225
+    port: 6379
+    password: Wdcloud998
+    timeout: 3000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: 1000ms
+  jackson:
+    #    接口返回的数据的日期格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #    客户端传递的日期格式
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  #    基于feign的接口调用，会生成很多{serverName}.FeignClientSpecification类的bean，
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB     #单文件上传最大大小
+      max-request-size: 500MB  #多文件上传最大大小
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server.testing3.svc.k8s.bjo.wdcloud.cc/eureka/
+  instance:
+    # instance-id: monitor-center-server
+    prefer-ip-address: true
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 600000
+ribbon:
+  ReadTimeout: 5000 # 两端连接建立时的超时时间
+  ConnectTimeout: 5000 # 客户端读取服务端资源时的超时时间
+http:
+  maxTotal: 400 # 最大连接数
+  defaultMaxPerRoute: 400 #默认的每个路由的最大连接数
+  connectTimeout: 5000 # 连接超时时间
+  connectionRequestTimeout: 5000 # 连接池获取连接超时时间
+  socketTimeout: 5000 # 数据传输最长时间
+  staleConnectionCheckEnabled: true # 提交前检测连接是否可用
+  validateAfterInactivity: 2000
+
+ai:
+  baidu:
+    client_id: QXeWczyhiykrOH0Tsj1YZCFS
+    client_secret: XGoipWfy1sXikzs3FVWadeC2SenbAWav
+    plan_id: 23852502
+    verify_token_expires_time: 3600
+    threshold_value: 80 #人脸识别阈值
+    quality_control: NORMAL
+    liveness_control: NORMAL
+    access_token_task_schdule_time: 2582000000
+    face:
+      enabled: false
+    token_key:
+      expire: 5
+    faceverify:
+      threshold: 0.3
+    personverify:
+      threshold: 80
+ali:
+  human:
+    access_key_id: LTAI4GB5RmUyXMGJHtYkUewA
+    access_secret: Vr6hU526oAIHfggIBgsIgWFYeh0WSL
+    biz_type: renshe
+    face:
+      biz_type: renshelivingface
+aliyun:
+  regionId: cn-shanghai
+  accessKeyId: LTAI5tPtJ3rhffaSCoX14QcM
+  accessKeySecret: Jl8o5KylAZGe0aeeClxHWaN6rbgmw3
+  oss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    bucket: raas-image-tes
+    filePathPrefix: hrss/
+    oldBucket: hrss-tes,hrss-pro
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+oauth:
+  user:
+    status_update_retry: 5
+    human:
+      face:
+        ali: false
+project:
+  env: test
+swagger:
+  base:
+    package: cc.wdcloud.hrss
+  api:
+    title: hrss
+    version: 1.0
+    description: 监控
+
+logging:
+  level:
+    cc:
+      wdcloud:
+        hrss:
+          monitor: debug
