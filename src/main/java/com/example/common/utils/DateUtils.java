@@ -15,7 +15,7 @@ public class DateUtils {
 
     public static Date getDateToDayAboutBaidu(String birthday) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");//注意月份是MM
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
             return simpleDateFormat.parse(birthday);
         } catch (Exception e) {
             return null;

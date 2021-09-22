@@ -11,8 +11,8 @@ public enum IdcardDiscernEnum {
     // 正面是有头像的一面，反面是有国徽的一面
     FRONT_TYPE("正面，有头像的一面", "front"), BACK_TYPE("反面，有国徽的一面", "back");
 
-    private String remarks;
-    private String name;
+    private final String remarks;
+    private final String name;
 
     IdcardDiscernEnum(String remarks, String name) {
         this.remarks = remarks;

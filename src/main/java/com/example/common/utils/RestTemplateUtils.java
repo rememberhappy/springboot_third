@@ -33,8 +33,8 @@ public class RestTemplateUtils {
         return restTemplate.postForObject(url, httpEntity, clazz);
     }
 
-    private MultiValueMap getParams(Map<String, Object> obj) {
-        MultiValueMap returnMap = new LinkedMultiValueMap(obj.size());
+    private MultiValueMap<String, Object> getParams(Map<String, Object> obj) {
+        MultiValueMap<String, Object> returnMap = new LinkedMultiValueMap<>(obj.size());
         for (Map.Entry<String, Object> entrySet : obj.entrySet()) {
             returnMap.add(entrySet.getKey(), entrySet.getValue());
         }

@@ -18,7 +18,6 @@ import com.example.common.constants.*;
 import com.example.common.utils.ImageUtils;
 import com.example.common.utils.RedissonTemplate;
 import com.example.common.utils.RestTemplateUtils;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -212,7 +211,7 @@ public class CertificationService {
         }
         // 公安验证
         BussinessBo<Boolean> personVerifyBo = personVerify(idcardDiscernVo.getImage(), CommonConstants.BASE64,
-                idcardDiscernVo.getIdcardNumber(), idcardDiscernVo.getName());
+                idcardDiscernVo.getIdCardNumber(), idcardDiscernVo.getName());
         if (personVerifyBo.status()) {
             // 身份信息公安验证成功，保存人脸认证结果
             AuthenticationHumanIDDataBo humanIDData = new AuthenticationHumanIDDataBo();
@@ -360,13 +359,13 @@ public class CertificationService {
         logger.error("人员实名认证后获取认证人脸, 获取对比结果失败:{}", aiBaiduResponseStr);
         return null;
     }
-    
+
     /**
      * 获取认证后的人脸图片
-     * 
+     *
      * @param accountId 账户ID
      * @return java.lang.String
-     * @Throws 
+     * @Throws
      * @Author zhangdj
      * @date 2021/8/18 10:31
      */
@@ -383,7 +382,7 @@ public class CertificationService {
         String humanFaceKey = "M_FACE_A_" + accountId;
         String humanFace = redissonTemplate.getRBucketValue(humanFaceKey);
         if (StringUtils.isBlank(humanFace)) {
-            humanFace =  ossService.dataDecrypt(ossService.getFileContentFromOSS(userPhotoOSSPath));
+            humanFace = ossService.dataDecrypt(ossService.getFileContentFromOSS(userPhotoOSSPath));
             redissonTemplate.setBucketValueAndExpire(humanFaceKey, humanFace, 30, TimeUnit.MINUTES);
         }
         return humanFace;

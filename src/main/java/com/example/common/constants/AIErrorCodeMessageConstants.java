@@ -73,18 +73,10 @@ public class AIErrorCodeMessageConstants {
     }
 
     public static String getSdkMessage(String code) {
-        if (SDK_CACHE_MAP.containsKey(code)) {
-            return SDK_CACHE_MAP.get(code);
-        } else {
-            return "检测异常";
-        }
+        return SDK_CACHE_MAP.getOrDefault(code, "检测异常");
     }
 
     public static String getCodeMessage(Integer code) {
-        if (CACHE_MAP.containsKey(code)) {
-            return CACHE_MAP.get(code);
-        } else {
-            return "操作失败";
-        }
+        return CACHE_MAP.getOrDefault(code, "操作失败");
     }
 }

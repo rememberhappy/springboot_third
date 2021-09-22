@@ -14,16 +14,17 @@ public class RedissonTemplate {
 
     /**
      * 获取字符串对象
+     *
      * @param objectName
      * @return
      */
-    public <T> RBucket<T> getRBucket(String objectName){
-        RBucket<T> bucket=redissonClient.getBucket(objectName);
+    public <T> RBucket<T> getRBucket(String objectName) {
+        RBucket<T> bucket = redissonClient.getBucket(objectName);
         return bucket;
     }
 
-    public String getRBucketValue(String objectName){
-        RBucket bucket=redissonClient.getBucket(objectName);
+    public String getRBucketValue(String objectName) {
+        RBucket bucket = redissonClient.getBucket(objectName);
         if (bucket != null) {
             return (String) bucket.get();
         } else {
@@ -33,32 +34,32 @@ public class RedissonTemplate {
 
     /**
      * 获取Map对象
+     *
      * @param objectName
      * @return
      */
-    public <K,V> RMap<K, V> getRMap(String objectName){
-        RMap<K, V> map=redissonClient.getMap(objectName);
-        return map;
+    public <K, V> RMap<K, V> getRMap(String objectName) {
+        return redissonClient.getMap(objectName);
     }
 
     /**
      * 获取有序集合
+     *
      * @param objectName
      * @return
      */
-    public <V> RSortedSet<V> getRSortedSet(String objectName){
-        RSortedSet<V> sortedSet=redissonClient.getSortedSet(objectName);
-        return sortedSet;
+    public <V> RSortedSet<V> getRSortedSet(String objectName) {
+        return redissonClient.getSortedSet(objectName);
     }
 
     /**
      * 获取集合
+     *
      * @param objectName
      * @return
      */
-    public <V> RSet<V> getRSet(String objectName){
-        RSet<V> rSet=redissonClient.getSet(objectName);
-        return rSet;
+    public <V> RSet<V> getRSet(String objectName) {
+        return redissonClient.getSet(objectName);
     }
 
     public <T> void rsetAdd(String key, T t) {
@@ -67,38 +68,38 @@ public class RedissonTemplate {
 
     /**
      * 获取列表
+     *
      * @param objectName
      * @return
      */
-    public <V> RList<V> getRListAndExpire(String objectName, long time, TimeUnit timeUnit){
-        RList<V> rList=redissonClient.getList(objectName);
+    public <V> RList<V> getRListAndExpire(String objectName, long time, TimeUnit timeUnit) {
+        RList<V> rList = redissonClient.getList(objectName);
         rList.expire(time, timeUnit);
         return rList;
     }
 
-    public <V> RList<V> getRList(String objectName){
-        RList<V> rList=redissonClient.getList(objectName);
-        return rList;
+    public <V> RList<V> getRList(String objectName) {
+        return redissonClient.getList(objectName);
     }
 
     /**
      * 获取队列
+     *
      * @param objectName
      * @return
      */
-    public <V> RQueue<V> getRQueue(String objectName){
-        RQueue<V> rQueue=redissonClient.getQueue(objectName);
-        return rQueue;
+    public <V> RQueue<V> getRQueue(String objectName) {
+        return redissonClient.getQueue(objectName);
     }
 
     /**
      * 获取双端队列
+     *
      * @param objectName
      * @return
      */
-    public <V> RDeque<V> getRDeque(String objectName){
-        RDeque<V> rDeque=redissonClient.getDeque(objectName);
-        return rDeque;
+    public <V> RDeque<V> getRDeque(String objectName) {
+        return redissonClient.getDeque(objectName);
     }
 
     /**
@@ -116,52 +117,52 @@ public class RedissonTemplate {
 
     /**
      * 获取锁
+     *
      * @param objectName
      * @return
      */
-    public RLock getRLock(String objectName){
-        RLock rLock=redissonClient.getLock(objectName);
-        return rLock;
+    public RLock getRLock(String objectName) {
+        return redissonClient.getLock(objectName);
     }
 
     /**
      * 获取原子数
+     *
      * @param objectName
      * @return
      */
-    public RAtomicLong getRAtomicLong(String objectName){
-        RAtomicLong rAtomicLong=redissonClient.getAtomicLong(objectName);
-        return rAtomicLong;
+    public RAtomicLong getRAtomicLong(String objectName) {
+        return redissonClient.getAtomicLong(objectName);
     }
 
     /**
      * 获取记数锁
+     *
      * @param objectName
      * @return
      */
-    public RCountDownLatch getRCountDownLatch(String objectName){
-        RCountDownLatch rCountDownLatch=redissonClient.getCountDownLatch(objectName);
-        return rCountDownLatch;
+    public RCountDownLatch getRCountDownLatch(String objectName) {
+        return redissonClient.getCountDownLatch(objectName);
     }
 
     /**
      * 获取消息的Topic
+     *
      * @param objectName
      * @return
      */
-    public <M> RTopic<M> getRTopic(String objectName, Class<M> clazz){
-        RTopic<M> rTopic=redissonClient.getTopic(objectName);
-        return rTopic;
+    public <M> RTopic<M> getRTopic(String objectName, Class<M> clazz) {
+        return redissonClient.getTopic(objectName);
     }
 
     /**
      * 获取消息的Topic
+     *
      * @param objectName
      * @return
      */
-    public <M> RTopic<M> getRTopic(String objectName){
-        RTopic<M> rTopic=redissonClient.getTopic(objectName);
-        return rTopic;
+    public <M> RTopic<M> getRTopic(String objectName) {
+        return redissonClient.getTopic(objectName);
     }
 
     public void setBucketValueAndExpire(String key, String value, int expires_time, TimeUnit timeUnit) {

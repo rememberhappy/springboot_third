@@ -32,7 +32,7 @@ public class OssConfig {
     private String docFileHost;*/
 
     @Bean(name = "ossClient")
-    public OSS ossClient(){
+    public OSS ossClient() {
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         return ossClient;
     }
@@ -87,12 +87,15 @@ public class OssConfig {
     public String getAccessKeyId() {
         return accessKeyId;
     }
+
     public void setAccessKeyId(String accessKeyId) {
         this.accessKeyId = accessKeyId;
     }
+
     public String getAccessKeySecret() {
         return accessKeySecret;
     }
+
     public void setAccessKeySecret(String accessKeySecret) {
         this.accessKeySecret = accessKeySecret;
     }
