@@ -368,7 +368,9 @@ public class CertificationService {
             // 获取认证结果异常
             throw new Exception(ErrorCodeConstants.ErrorMessage.AI_O4);
         }
+        // baidu 人脸图片地址
         String baiduHumanfaceUrl = getOauthHumanFace(verifyToken);
+        // 将实名认证后的用户信息和人脸信息，保存到本地
 //        humanIDData.setFaceImageUrl(ossService.uploadFile(accountId, imageUtils.imageByUrl(baiduHumanfaceUrl)));
 //        Resp<Boolean> saveResponse = userService.updateAccountProfile(accountProfile, humanIdDataBo);
 //        if (saveResp.isSuccess() && saveResp.getData()) {
@@ -378,12 +380,12 @@ public class CertificationService {
     }
 
     /**
-     * 获取认证人脸接口
+     * 获取实名认证后人脸接口
      * 此接口调用时机: 用户认证成功后才能调用
      */
     private String getOauthHumanFace(String verifyToken) throws Exception {
-        String sendOauthHumanFaceUrl = ALiAiUrlConstants.OAUTH_HUMAN_FACE_URL.concat(baiDuAccessToken.getAccessToken());
-        Map<String, String> param = new HashMap<>();
+        String sendOauthHumanFaceUrl = ALiAiUrlConstants.OAUTH_HUMAN_FACE_URL.concat(baiDuVerifyToken.getVerifyToken(0L/*Commoninfo.getAccountId()*/));
+        Map<String, String> param = new HashMap<>(1);
         param.put("verify_token", verifyToken);
         String aiBaiduResponseStr = restTemplateUtils.postForObjectAboutJson(sendOauthHumanFaceUrl, param, String.class);
         JSONObject aiBaiduResponseJb = JSON.parseObject(aiBaiduResponseStr);
@@ -399,10 +401,10 @@ public class CertificationService {
     }
 
     /**
-     * 通过verifyToken 获取认证结果
+     * 通过 verifyToken 获取实名认证后的用户信息和人脸信息结果
      */
     private AuthenticationHumanIDDataBo getAuthenticationResult(String verifyToken) throws Exception {
-        String sendOauthResultDetailUrl = ALiAiUrlConstants.OAUTH_RESULT_DETAIL_URL.concat(baiDuAccessToken.getAccessToken());
+        String sendOauthResultDetailUrl = ALiAiUrlConstants.OAUTH_RESULT_DETAIL_URL.concat(baiDuVerifyToken.getVerifyToken(0L/*Commoninfo.getAccountId()*/));
         Map<String, String> param = new HashMap<>();
         param.put("verify_token", verifyToken);
         String aiBaiduResponseStr = restTemplateUtils.postForObjectAboutJson(sendOauthResultDetailUrl, param, String.class);

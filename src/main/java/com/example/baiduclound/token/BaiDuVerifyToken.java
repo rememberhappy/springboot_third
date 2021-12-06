@@ -17,11 +17,13 @@ import java.util.Map;
 
 /**
  * 百度AIP开放平台使用OAuth2.0授权调用开放API，调用API时必须在URL中带上access_token参数
+ * 获取认证后的用户信息所需要的 token
  */
 @Component
 public class BaiDuVerifyToken {
     private static final Logger logger = LoggerFactory.getLogger("BaiDuAccessToken");
 
+    // 方案的id信息
     @Value("${ai.baidu.plan_id}")
     private int planId;
     @Autowired
@@ -33,6 +35,7 @@ public class BaiDuVerifyToken {
 
     /**
      * 通过access_token获取的verify_token
+     * 此token用于获取认证URL和认证成功后的用户信息
      *
      * @param
      * @return java.lang.String
@@ -52,8 +55,8 @@ public class BaiDuVerifyToken {
 //        }
         Map<String, Integer> param = new HashMap<>(1);
         param.put("plan_id", planId);
-        String verifyTokenResonse = restTemplateUtils.postForObjectAboutJson(ALiAiUrlConstants.VERIFY_TOKEN_URL.concat(baiDuAccessToken.getAccessToken()), param, String.class);
-        JSONObject verifyTokenJb = JSON.parseObject(verifyTokenResonse);
+        String verifyTokenResponse = restTemplateUtils.postForObjectAboutJson(ALiAiUrlConstants.VERIFY_TOKEN_URL.concat(baiDuAccessToken.getAccessToken()), param, String.class);
+        JSONObject verifyTokenJb = JSON.parseObject(verifyTokenResponse);
         Object successObj = verifyTokenJb.get("success");
         if (successObj != null) {
             boolean success = (boolean) successObj;
@@ -63,7 +66,7 @@ public class BaiDuVerifyToken {
                 return verifyToken;
             }
         }
-        logger.error("获取AI_VERIFY_TOKEN异常, message:{}", verifyTokenResonse);
+        logger.error("获取AI_VERIFY_TOKEN异常, message:{}", verifyTokenResponse);
         throw new Exception(ErrorCodeConstants.ErrorMessage.AI_O2);
     }
 }

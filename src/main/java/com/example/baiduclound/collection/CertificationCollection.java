@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @Author zhangdj
  * @Date 2021/8/15:17:37
  */
-@Api(tags = "阿里云第三方接口")
+@Api(tags = "百度云第三方接口")
 @RestController
 public class CertificationCollection {
     @Autowired
@@ -72,25 +72,12 @@ public class CertificationCollection {
         return BussinessBo.success(true);
     }
 
-    // 这个有问题
-    @ApiOperation("AI实名认证成功后, 更新用户认证身份信息【通过verifyToken获取用户认证信息】, 以及用户的人脸库信息")
+    @ApiOperation("AI实名认证成功后, 将用户认证身份信息【通过verifyToken获取用户认证信息】, 以及用户的人脸库信息 更新到本地数据库")
     @PostMapping("realNameAuthenticationSuccess")
     public BussinessBo<Boolean> realNameAuthenticationAfterUpdateUserDataAndImage(Long accountId, String verifyToken) throws Exception {
         certificationService.updateHumanFaceAndAuthenIDData(accountId, verifyToken);
         return BussinessBo.success(true);
     }
-
-//    // tokenType == 1: 认证; 2: 活体  获取认证结果, 以及保存认证信息
-//    @ApiOperation("ali:获取认证结果,维护认证信息")
-//    @GetMapping("verifyResult")
-//    public BussinessBo<Boolean> verifyResult(@RequestParam Integer tokenType, Long accountId) throws Exception {
-//        BussinessBo bussinessBo = certificationService.verifyResult(tokenType, accountId);
-//        if (bussinessBo.status()) {
-//            return BussinessBo.success(true);
-//        } else {
-//            return BussinessBo.error(bussinessBo.getCode(), bussinessBo.getMessage());
-//        }
-//    }
 
     @ApiModelProperty("获取用户人脸(base64数据(无图片类型标识))")
     @GetMapping("getFece")
@@ -105,4 +92,16 @@ public class CertificationCollection {
         Preconditions.checkArgument(StringUtils.isNotEmpty(image), "人脸图片不能为空");
         return certificationService.humanFaceComparison(image);
     }
+
+//    // tokenType == 1: 认证; 2: 活体  获取认证结果, 以及保存认证信息
+//    @ApiOperation("ali:获取认证结果,维护认证信息")
+//    @GetMapping("verifyResult")
+//    public BussinessBo<Boolean> verifyResult(@RequestParam Integer tokenType, Long accountId) throws Exception {
+//        BussinessBo bussinessBo = certificationService.verifyResult(tokenType, accountId);
+//        if (bussinessBo.status()) {
+//            return BussinessBo.success(true);
+//        } else {
+//            return BussinessBo.error(bussinessBo.getCode(), bussinessBo.getMessage());
+//        }
+//    }
 }

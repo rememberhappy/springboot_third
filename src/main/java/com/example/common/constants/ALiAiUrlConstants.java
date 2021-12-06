@@ -133,7 +133,7 @@ public interface ALiAiUrlConstants {
      */
     String VERIFY_TOKEN_URL = "https://aip.baidubce.com/rpc/2.0/brain/solution/faceprint/verifyToken/generate?access_token=";
     /**
-     * 【验证后查询接口，获取认证人脸接口】。地址：https://cloud.baidu.com/doc/FACE/s/Bk8k29mmq
+     * 【实名认证后查询接口，获取认证人脸接口】。地址：https://cloud.baidu.com/doc/FACE/s/Bk8k29mmq
      * 返回进行人脸实名认证过程中进行认证的最终采集的人脸信息（仅在认证成功时返回人脸信息，认证失败返回错误码）
      * {
      *     "success": true,
@@ -145,7 +145,7 @@ public interface ALiAiUrlConstants {
      */
     String OAUTH_HUMAN_FACE_URL = "https://aip.baidubce.com/rpc/2.0/brain/solution/faceprint/result/simple?access_token=";
     /**
-     * 【验证后查询接口，获取认证结果】。地址：https://cloud.baidu.com/doc/FACE/s/Bk8k29mmq
+     * 【实名认证后查询接口，获取认证结果】。地址：https://cloud.baidu.com/doc/FACE/s/Bk8k29mmq
      * 认证结果信息查询，包含身份证OCR识别信息、用户二次确认的身份证信息，活体检测信息、及用户对权威数据源图片进行比对的分数信息。
      * （仅在认证成功时返回上述信息，认证失败返回错误码）根据Verify_token返回
      * {
