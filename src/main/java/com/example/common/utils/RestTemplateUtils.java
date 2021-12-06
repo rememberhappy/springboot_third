@@ -18,6 +18,16 @@ public class RestTemplateUtils {
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     * 使用 restTemplate 发送请求
+     *
+     * @param url   请求地址
+     * @param obj   请求参数
+     * @param clazz 返回的数据类型
+     * @return T
+     * @Author zhangdj
+     * @date 2021/12/6 16:04
+     */
     public <T> T postForObjectAboutJson(String url, Object obj, Class<T> clazz) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);

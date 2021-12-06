@@ -180,5 +180,12 @@ public interface ALiAiUrlConstants {
      * }
      */
     String OAUTH_RESULT_DETAIL_URL = "https://aip.baidubce.com/rpc/2.0/brain/solution/faceprint/result/detail?access_token=";
+    /**
+     * 人脸对比
+     */
     String HUMAN_FACE_MATCH_URL = "https://aip.baidubce.com/rest/2.0/face/v3/match?access_token=";
+    /**
+     * 营业执照OCR
+     */
+    String OAUTH_BUSINESS_LICENSE_ISCERN_URL = "https://aip.baidubce.com/rest/2.0/ocr/v1/business_license?access_token=";
 }

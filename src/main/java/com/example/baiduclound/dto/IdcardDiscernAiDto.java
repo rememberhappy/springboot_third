@@ -1,4 +1,4 @@
-package com.example.aliclound.dto;
+package com.example.baiduclound.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -28,7 +28,7 @@ public class ImageUtils {
     // png格式
     private transient static final String BASE64_PREFIX_PNG = "data:image/png;base64,";
 
-    // Base64
+    // 将图片转成 Base64 字符串
     public String imageBase64Compress(String imgBase64) throws IOException {
         return imageBase64Compress(imgBase64, null);
     }
